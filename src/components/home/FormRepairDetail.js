@@ -46,6 +46,22 @@ function FormRepairDetail( { passDataToParent } )
                     }
                 required/>
             </div>
+            {/*Time of Repair (in AM/PM format)*/}
+            <div className="row mt-2 ms-1 me-1">
+                <label className="col-12 col-md-12 col-lg-4">Repair Time *</label>
+                <select className="col-12 col-md-12 col-lg-7" required defaultValue="">
+                    <option value="" disabled hidden>Select Time</option>
+                    <option value="9am">9 AM</option>
+                    <option value="10am">10 AM</option>
+                    <option value="11am">11 AM</option>
+                    <option value="12pm">12 PM</option>
+                    <option value="1pm">1 PM</option>
+                    <option value="2pm">2 PM</option>
+                    <option value="3pm">3 PM</option>
+                    <option value="4pm">4 PM</option>
+                    <option value="5pm">5 PM</option>
+                </select>
+            </div>
             {/*Under Warranty*/}
             <div className="row mt-2 ms-1 me-1">
                 <fieldset className="border border-black col-12 col-lg-11 ms-1 me-4 mb-3">
