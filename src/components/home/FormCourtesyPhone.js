@@ -1,0 +1,115 @@
+//Import
+import { useState } from 'react';
+
+//Function Component
+function FormCourtesyPhone( { passDataToParent } ) {
+
+    // "passDataToParent" is a callback function: function passDataToParent(value)
+    //The callback function is to change a piece of the state that is a part of the parent component
+
+    //Assume there is a list of courtesy items as below
+    const courtesyList = [
+        { id: 0, type: 'none', name: 'none', bond: 0 },
+        { id: 1, type: 'phone', name: 'iPhone', bond: 275 },
+        { id: 2, type: 'phone', name: 'Samsung Galaxy', bond: 100 },
+        { id: 3, type: 'phone', name: 'Nokia', bond: 100 },
+        { id: 4, type: 'charger', name: 'iPhone Charger', bond: 30 },
+        { id: 5, type: 'charger', name: 'Samsung Charger', bond: 30 },
+        { id: 6, type: 'charger', name: 'Nokia Charger', bond: 30 },
+        { id: 7, type: 'phone', name: 'Xiaomi', bond: 200 },
+        { id: 8, type: 'charger', name: 'Xiaomi Charger', bond: 30 },
+        { id: 9, type: 'phone', name: 'OnePlus', bond: 250 },
+        { id: 10, type: 'charger', name: 'OnePlus Charger', bond: 30 }
+    ];
+
+    //Declare "state"
+    const [phoneBorrow, setPhoneBorrow] = useState(0); // 0 = 'none'
+    const [chargerBorrow, setChargerBorrow] = useState(0); // 0 = 'none'
+
+    //Hande "onChange" event
+    let addPhone = (selectedOption) => {
+        selectedOption == 'none' ? setPhoneBorrow(0) : setPhoneBorrow(selectedOption);
+        //Update totalBond
+        let updateId = 0;
+        selectedOption == 'none' ? (updateId = 0) : (updateId = Number(selectedOption));
+        let updateBond = courtesyList.filter(item => {return item.id == updateId})[0].bond
+            + courtesyList.filter(item => {return item.id == chargerBorrow})[0].bond;
+        //Send data upto Parent by calling callback function "passDataToParent"
+        passDataToParent(updateBond); //Child1 (FormCourtesyPhone)
+    };
+
+    let addCharger = (selectedOption) => {
+        selectedOption == 'none' ? setChargerBorrow(0) : setChargerBorrow(selectedOption);
+        //Update totalBond
+        let updateId = 0;
+        selectedOption == 'none' ? (updateId = 0) : (updateId = Number(selectedOption));
+        let updateBond = courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond
+            + courtesyList.filter(item => {return item.id == updateId})[0].bond;
+        //Send data upto Parent by calling callback function "passDataToParent"
+        passDataToParent(updateBond); //Child1 (FormCourtesyPhone)
+    };
+
+    //Filter courtesyList into phone and charger options for dropdown
+    let phoneOptions = courtesyList.filter(item => item.type === 'phone');
+
+    let chargerOptions = courtesyList.filter(item => item.type === 'charger');
+    
+    //Component UI: HTML Rendering
+    return(
+        <>
+            {/*Courtesy Phone Section*/}
+            <h2>Courtesy Phone</h2>
+            {/*Phone item types*/}
+            <h4 className='ms-4 mt-2'>Choose a phone</h4>
+            <div className="row mt-2 ms-3 me-3">
+                <label className="col-12 col-md-12 col-lg-4">Item Type </label>
+                {/*Phone selection dropdown using courtesyList data */}
+                <select className="col-12 col-md-12 col-lg-7"
+                 onChange={(selected) => addPhone(selected.target.value)}>
+                    <option value="none" selected>None</option>
+                    {phoneOptions.map(item => (
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                    ))}
+                </select>
+            </div>
+            {/*Charger item types*/}
+            <h4 className='ms-4 mt-2'>Choose a charger</h4>
+            <div className="row mt-2 ms-3 me-3">
+                <label className="col-12 col-md-12 col-lg-4">Item Type </label>
+                <select className="col-12 col-md-12 col-lg-7" 
+                 onChange={(selected) => addCharger(selected.target.value)}>
+                    <option value="none" selected>None</option>
+                    {chargerOptions.map(item => (
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                    ))}
+                </select>
+            </div>
+            {/*Table of added Courtesy items*/}
+            <h4 className='ms-4 mt-2'>Borrow items</h4>
+            <div className="row mt-2 ms-3 me-3 bg-white">
+                <table className="table table-bordered mb-0">
+                    <tr>
+                        <td>Item</td>
+                        <td>Cost</td>
+                    </tr>
+
+                    {/* Display all items in the state in the table */}
+                    {phoneBorrow == 0 ? null : (
+                        <tr>
+                            <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].name}</td>
+                            <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond}</td>
+                        </tr>
+                    )}
+                    {chargerBorrow == 0 ? null : (
+                        <tr>
+                            <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].name}</td>
+                            <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].bond}</td>
+                        </tr>
+                    )}
+                </table>
+            </div>
+        </>
+    );
+}
+//Export this component to the entire app, can be re-used or hooked into other Components
+export default FormCourtesyPhone;
