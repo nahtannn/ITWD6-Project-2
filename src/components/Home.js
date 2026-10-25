@@ -21,6 +21,8 @@ function Home() {
     const updateCustomerType = (value) => setsharedCustomerType(value);
     const [sharedCustomerType, setsharedCustomerType] = useState('customer');
 
+    
+
     //Pass customerDetails from FormCustomerDetail to Home component
     const [customerDetails, setCustomerDetails] = useState({
         type: "customer",
@@ -33,7 +35,7 @@ function Home() {
         postCode: "",
         phone: "",
         email: ""});
-
+    
     //Pass repair details from FormRepairDetail to Home component
     const [repairDetails, setRepairDetails] = useState({
         purchaseDate: "",
@@ -63,7 +65,8 @@ function Home() {
             const attachedData = {
                 sharedBond,
                 sharedCustomerType,
-                customerDetails
+                customerDetails,
+                repairDetails
             };
             navigate('/bookings');
         }
@@ -82,7 +85,8 @@ function Home() {
                 </div>
                 {/*Repair Detail */}
                 <div className="col-12 col-lg-4 p-4 m-0" style={{ minHeight: '30vh', backgroundColor: '#D5f5e3' }}>
-                    <FormRepairDetail  passDataToParent={UpdateWarranty} />
+                    <FormRepairDetail  passDataToParent={UpdateWarranty}
+                     sendRepairDetails={(value) => setRepairDetails(value)} />
                 </div>
                 {/*Courtesy Phone and Cost*/}
                 <div className="col-12 col-lg-4 p-0 m-0">
