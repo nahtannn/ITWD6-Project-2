@@ -1,12 +1,18 @@
+import { useEffect } from "react";
 //Function Component
-function FormCost ( props ) {
+function FormCost ( props, { sendCostDetails } ) {
     const bond = props.sharedPropCustomerType === "customer"
         ? Number(props.sharedPropBond)
         : 0;
     
-    const totalCost = bond + (props.sharedPropWarranty ? 0 : 85);
+    const serviceFee = props.sharedPropWarranty ? 0 : 85;
+    const totalCost = bond + serviceFee;
     const gst = totalCost * 0.15;
     const totalAndGst = totalCost + gst;
+
+    useEffect(() => {
+        sendCostDetails( {bond, serviceFee, totalCost, gst, totalAndGst} );
+    }, [bond, serviceFee, totalCost, gst, totalAndGst, sendCostDetails]);
     //Component UI: HTML Rendering
     return(
     <>
@@ -17,7 +23,7 @@ function FormCost ( props ) {
         </div>
         <div className="row mt-1 ms-3 me-3">
             <label className="col-12 col-md-12 col-lg-4">Service Fee ($)</label>
-            <input className="col-12 col-md-12 col-lg-7" type="number" value={(props.sharedPropWarranty ? 0: 85).toFixed(2)} readOnly/>
+            <input className="col-12 col-md-12 col-lg-7" type="number" value={(serviceFee).toFixed(2)} readOnly/>
         </div>
         <div className="row mt-1 ms-3 me-3">
             <label className="col-12 col-md-12 col-lg-4">Total ($)</label>

@@ -21,6 +21,8 @@ function Home() {
     const updateCustomerType = (value) => setsharedCustomerType(value);
     const [sharedCustomerType, setsharedCustomerType] = useState('customer');
 
+    const updateCostDetails = (value) => setCostDetails(value); //Child2(FormCost) pass data to parent
+
     //Pass customerDetails from FormCustomerDetail to Home component
     const [customerDetails, setCustomerDetails] = useState({
         type: "customer",
@@ -51,7 +53,14 @@ function Home() {
         phoneBorrow: "none",
         chargerBorrow: "none",
     });
-    
+
+    const [costDetails, setCostDetails] = useState({
+        bond: 0,
+        serviceFee: 0,
+        totalCost: 0,
+        gst: 0,
+        totalAndGst: 0
+    });
     //Data
     const navigate = useNavigate();
     
@@ -61,10 +70,12 @@ function Home() {
         try {
             const attachedData = {
                 sharedBond,
+                sharedWarranty,
                 sharedCustomerType,
                 customerDetails,
                 repairDetails,
-                courtesyPhoneDetails
+                courtesyPhoneDetails,
+                costDetails
             };
             console.log(attachedData);
             navigate('/bookings');
@@ -95,7 +106,8 @@ function Home() {
                     </div>
                     {/*Cost*/}
                     <div className="p-4" style={{ minHeight: '20vh', backgroundColor: '#edbb99' }}>
-                        <FormCost sharedPropBond={sharedBond}  sharedPropWarranty={sharedWarranty} sharedPropCustomerType={sharedCustomerType} />
+                        <FormCost sharedPropBond={sharedBond}  sharedPropWarranty={sharedWarranty} sharedPropCustomerType={sharedCustomerType} 
+                        sendCostDetails={(value) => setCostDetails(value)} />
                         {/*Child 2 (FormCost) */}
                     </div>
                 </div>
