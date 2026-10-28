@@ -21,8 +21,6 @@ function Home() {
     const updateCustomerType = (value) => setsharedCustomerType(value);
     const [sharedCustomerType, setsharedCustomerType] = useState('customer');
 
-    
-
     //Pass customerDetails from FormCustomerDetail to Home component
     const [customerDetails, setCustomerDetails] = useState({
         type: "customer",
@@ -42,9 +40,9 @@ function Home() {
         repairDate: "",
         warranty: false,
         imei: "",
-        phoneManufacturer: "Apple",
+        phoneManufacturer: "",
         phoneModel: "",
-        faultCategory: "Battery",
+        faultCategory: "",
         faultDescription: ""
     });
 
@@ -52,9 +50,8 @@ function Home() {
     const [courtesyPhoneDetails, setCourtesyPhoneDetails] = useState({
         phoneBorrow: "none",
         chargerBorrow: "none",
-        phoneCost: "",
-        chargerCost: ""
     });
+    
     //Data
     const navigate = useNavigate();
     
@@ -66,8 +63,10 @@ function Home() {
                 sharedBond,
                 sharedCustomerType,
                 customerDetails,
-                repairDetails
+                repairDetails,
+                courtesyPhoneDetails
             };
+            console.log(attachedData);
             navigate('/bookings');
         }
         catch (e) {
@@ -92,7 +91,7 @@ function Home() {
                 <div className="col-12 col-lg-4 p-0 m-0">
                     {/*Courtesy Phone*/}
                     <div className="p-4" style={{ minHeight: '30vh', backgroundColor: '#2874a6' }}>
-                        <FormCourtesyPhone passDataToParent={updateSharedState} />
+                        <FormCourtesyPhone passDataToParent={updateSharedState} sendCourtesyPhoneDetails={(value) => setCourtesyPhoneDetails(value)} />
                     </div>
                     {/*Cost*/}
                     <div className="p-4" style={{ minHeight: '20vh', backgroundColor: '#edbb99' }}>

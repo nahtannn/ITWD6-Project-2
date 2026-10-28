@@ -1,8 +1,8 @@
 //Import
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 //Function Component
-function FormCourtesyPhone( { passDataToParent } ) {
+function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
 
     // "passDataToParent" is a callback function: function passDataToParent(value)
     //The callback function is to change a piece of the state that is a part of the parent component
@@ -36,6 +36,10 @@ function FormCourtesyPhone( { passDataToParent } ) {
             + courtesyList.filter(item => {return item.id == chargerBorrow})[0].bond;
         //Send data upto Parent by calling callback function "passDataToParent"
         passDataToParent(updateBond); //Child1 (FormCourtesyPhone)
+        sendCourtesyPhoneDetails({
+            phoneBorrow: phoneBorrow == 0 ? 'none' : phoneBorrow,
+            chargerBorrow: chargerBorrow == 0 ? 'none' : chargerBorrow
+        });
     };
 
     let addCharger = (selectedOption) => {
@@ -47,6 +51,10 @@ function FormCourtesyPhone( { passDataToParent } ) {
             + courtesyList.filter(item => {return item.id == updateId})[0].bond;
         //Send data upto Parent by calling callback function "passDataToParent"
         passDataToParent(updateBond); //Child1 (FormCourtesyPhone)
+        sendCourtesyPhoneDetails({
+            phoneBorrow: phoneBorrow == 0 ? 'none' : phoneBorrow,
+            chargerBorrow: chargerBorrow == 0 ? 'none' : chargerBorrow
+        });
     };
 
     //Filter courtesyList into phone and charger options for dropdown
@@ -54,6 +62,12 @@ function FormCourtesyPhone( { passDataToParent } ) {
 
     let chargerOptions = courtesyList.filter(item => item.type === 'charger');
     
+    useEffect(() => {
+        sendCourtesyPhoneDetails({
+            phoneBorrow: phoneBorrow == 0 ? 'none' : phoneBorrow,
+            chargerBorrow: chargerBorrow == 0 ? 'none' : chargerBorrow
+        });
+    }, [phoneBorrow, chargerBorrow, sendCourtesyPhoneDetails]);
     //Component UI: HTML Rendering
     return(
         <>
