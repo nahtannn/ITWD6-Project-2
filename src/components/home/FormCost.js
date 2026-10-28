@@ -1,11 +1,16 @@
 import { useEffect } from "react";
 //Function Component
-function FormCost ( props, { sendCostDetails } ) {
-    const bond = props.sharedPropCustomerType === "customer"
-        ? Number(props.sharedPropBond)
+function FormCost ( { 
+    sharedPropCustomerType,
+    sharedPropBond,
+    sharedPropWarranty,
+    sendCostDetails,
+} ) {
+    const bond = sharedPropCustomerType === "customer"
+        ? Number(sharedPropBond)
         : 0;
     
-    const serviceFee = props.sharedPropWarranty ? 0 : 85;
+    const serviceFee = sharedPropWarranty ? 0 : 85;
     const totalCost = bond + serviceFee;
     const gst = totalCost * 0.15;
     const totalAndGst = totalCost + gst;
