@@ -56,7 +56,7 @@ function Bookings() {
                         </div>
                         <div className="card-body">
                             <h5 className="card-title"><u>Customer Details</u></h5>
-                            <p className="card-text mb-1">{booking.title + " " + booking.first_name + " " + booking.last_name}
+                            <p className="card-text mb-1">{booking.title + " " + booking.first_name + " " + booking.last_name + " • Type: " + booking.customer_type}
                                 <br />
                                 {booking.phone_number + " • " + booking.email}
                                 <br />
@@ -97,15 +97,15 @@ function Bookings() {
                         <hr style={{ margin: "0" }}/>
                         <div className="card-body">
                             <h5 className="card-title"><u>Payment Details</u></h5>
-                            <p className="card-text"><strong>Bond: </strong>{"$" + booking.cost_bond}
+                            <p className="card-text"><strong>Bond: </strong>{"$" + booking.cost_bond.toFixed(2)}
                                 <br />
-                                <strong>Service Fee: </strong>{"$" + booking.cost_service_fee}
+                                <strong>Service Fee: </strong>{"$" + booking.cost_service_fee.toFixed(2)}
                                 <br />
-                                <strong>Total: </strong>{"$" + booking.cost_total}
+                                <strong>Total: </strong>{"$" + booking.cost_total.toFixed(2)}
                                 <br />
-                                <strong>GST: </strong>{"$" + booking.cost_gst}
+                                <strong>GST: </strong>{"$" + booking.cost_gst.toFixed(2)}
                                 <br />
-                                <strong>Total and GST: </strong>{"$" + booking.cost_total_and_gst}
+                                <strong>Total and GST: </strong>{"$" + booking.cost_total_and_gst.toFixed(2)}
                             </p>
                             
                         </div>
@@ -121,7 +121,8 @@ function Bookings() {
                             <hr style={{ margin: "0" }}/>
                             <p className="card-text mb-1" style={{ fontSize: "0.8rem" }}><i>{"Invoice Date: " + new Date(booking.created_at).toLocaleString(undefined, {
                                 dateStyle: "long",
-                                timeStyle: "short"
+                                timeStyle: "short",
+                                hour12: false
                             })}</i></p>
                         </div>
                     </div>
