@@ -54,9 +54,9 @@ function Header() {
             justify-content-center align-items-center" style={taglineStyle}>{currentPage.pageTitle}</div>
             <div className="col-12 col-lg-4">
                 <div className="row">
-                    <Link to="/" className="col-12 col-md-6 p-0 m-0 border border-dark text-white text-center" style={{backgroundColor: '#8FB569'}}>Home</Link>
-                    <Link to="/advanced-js" className="col-12 col-md-6 p-0 m-0 border border-dark text-white text-center" style={{backgroundColor: '#3498DB'}}>Extension</Link>
-                    <Link to="/bookings" className="col-12 col-md-6 p-0 m-0 border border-dark text-white text-center" style={{backgroundColor: '#E67E22'}}>Bookings</Link>
+                    <Link to="/" className="col-12 col-md-4 p-1 m-0 border border-dark text-white text-center" style={{backgroundColor: '#8FB569'}}>Home</Link>
+                    <Link to="/advanced-js" className="col-12 col-md-4 p-1 m-0 border border-dark text-white text-center" style={{backgroundColor: '#3498DB'}}>Extension</Link>
+                    <Link to="/bookings" className="col-12 col-md-4 p-1 m-0 border border-dark text-white text-center" style={{backgroundColor: '#E67E22'}}>Bookings</Link>
                 </div>
             </div>
         </header>
