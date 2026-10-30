@@ -102,24 +102,32 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
             <h4 className='ms-4 mt-2'>Borrow items</h4>
             <div className="row mt-2 ms-3 me-3 bg-white">
                 <table className="table table-bordered mb-0">
-                    <tr>
-                        <td>Item</td>
-                        <td>Cost</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Item</td>
+                            <td>Cost</td>
+                        </tr>
 
-                    {/* Display all items in the state in the table */}
-                    {phoneBorrow == 0 ? null : (
-                        <tr>
-                            <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].name}</td>
-                            <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond}</td>
-                        </tr>
-                    )}
-                    {chargerBorrow == 0 ? null : (
-                        <tr>
-                            <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].name}</td>
-                            <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].bond}</td>
-                        </tr>
-                    )}
+                        {/* Display all items in the state in the table */}
+                        {phoneBorrow == 0 ? null : (
+                            <tr>
+                                <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].name}</td>
+                                <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond}</td>
+                            </tr>
+                        )}
+                        {chargerBorrow == 0 ? null : (
+                            <tr>
+                                <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].name}</td>
+                                <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].bond}</td>
+                            </tr>
+                        )}
+                    </tbody>
                 </table>
             </div>
         </>

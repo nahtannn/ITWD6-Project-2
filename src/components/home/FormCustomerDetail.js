@@ -85,8 +85,8 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                 <div className="row mt-2 ms-1 me-1">
                     <label className="col-12 col-md-12 col-lg-4">First Name *</label>
                     <input className="col-12 col-md-12 col-lg-7" type="text" name="firstName"
-                        pattern="^[A-Za-z\s--]+$" title="First Name should only contain letters, spaces, hypens, and en-dashes" 
-                        onInput={(e) => e.target.value = e.target.value.replace(/[^A-Za-z\s--]/g, '')}
+                        pattern="[A-Za-z\s\-\u2013]+" title="First Name should only contain letters, spaces, hypens, and en-dashes" 
+                        onInput={(e) => (e.target.value = e.target.value.replace(/[^A-Za-z\s\-\u2013]/g, ''))}
                         onChange={handleChange}
                         required/>
                 </div>
@@ -94,8 +94,8 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                 <div className="row mt-2 ms-1 me-1">
                     <label className="col-12 col-md-12 col-lg-4">Last Name *</label>
                     <input className="col-12 col-md-12 col-lg-7" type="text" name="lastName" onChange={handleChange}
-                        pattern="^[A-Za-z\s--]+$" title="Last Name should only contain letters, spaces, hypens, and en-dashes" 
-                        onInput={(e) => e.target.value = e.target.value.replace(/[^A-Za-z\s--]/g, '')}
+                        pattern="[A-Za-z\s\-\u2013]+" title="Last Name should only contain letters, spaces, hypens, and en-dashes" 
+                        onInput={(e) => (e.target.value = e.target.value.replace(/[^A-Za-z\s\-\u2013]/g, ''))}
                         required/>
                 </div>
                 {/*Street*/}
@@ -128,11 +128,9 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                 <div className="row mt-2 ms-1 me-1">
                     <label className="col-12 col-md-12 col-lg-4">Phone Number *</label>
                     <input className="col-12 col-md-12 col-lg-7" type="tel"
-                        inputMode="tel" pattern= "[0-9\s()\-+]+"
+                        inputMode="tel" pattern= "[0-9\s\(\)\-+]+"
                         title="Only numbers, spaces, and ( ) - + symbols are allowed"
-                        onInput={(e) => {
-                            e.target.value = e.target.value.replace(/[^0-9\s()\-+]/g, '');
-                        }}
+                        value={customerDetails.phoneNumber || ''}
                         name="phoneNumber" onChange={handleChange}
                     required/>
                 </div>

@@ -49,8 +49,11 @@ function Bookings() {
                     <div key={booking.id}
                         style={{ border: "1px solid gray", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
                     <p>{booking.title + ": " + booking.first_name + " " + booking.last_name}</p>
-                    <p>{"Bond: " + booking.bond}</p>
-                    <p>{"Service fee: " + booking.service}</p>
+                    <p>{"Bond: " + booking.cost_bond}</p>
+                    <p>{"Service fee: " + booking.cost_service_fee}</p>
+                    <p>{"Total: " + booking.cost_total}</p>
+                    <p>{"GST: " + booking.cost_gst}</p>
+                    <p>{"Total and GST: " + booking.cost_total_and_gst}</p>
                 </div>
             ))
             )

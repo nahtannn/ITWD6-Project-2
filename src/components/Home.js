@@ -24,6 +24,9 @@ function Home() {
 
     const updateCostDetails = (value) => setCostDetails(value); //Child2(FormCost) pass data to parent
 
+
+    const [submitting, setSubmitting] = useState(false); //State to track form submission status
+
     //Pass customerDetails from FormCustomerDetail to Home component
     const [customerDetails, setCustomerDetails] = useState({
         type: "customer",
@@ -42,7 +45,7 @@ function Home() {
         purchaseDate: "",
         repairDate: "",
         repairTime: "",
-        warranty: false,
+        warrantyCheck: false,
         imei: "",
         phoneManufacturer: "",
         phoneModel: "",
@@ -69,61 +72,52 @@ function Home() {
     //Functions and Methods
     const onSubmit = async (event) => {
         event.preventDefault();
+        if (submitting) return; // Prevent multiple submissions
+        setSubmitting(true);
+
         try {
             // Build bookingData object
             const bookingData = {
-                customerType: sharedCustomerType ? "customer" : "business",
+                customer_type: sharedCustomerType ? "customer" : "business",
                 title: customerDetails.title,
-                firstName: customerDetails.firstName,
-                lastName: customerDetails.lastName,
+                first_name: customerDetails.firstName,
+                last_name: customerDetails.lastName,
                 street: customerDetails.street,
                 suburb: customerDetails.suburb || null,
                 city: customerDetails.city,
-                postCode: customerDetails.postCode || null,
-                phoneNumber: customerDetails.phone,
+                postcode: customerDetails.postCode || null,
+                phone_number: customerDetails.phoneNumber,
                 email: customerDetails.email,
-                purchaseDate: repairDetails.purchaseDate,
-                repairDate: new Date(
+                purchase_date: repairDetails.purchaseDate,
+                repair_date: new Date(
                     `${repairDetails.repairDate}T${repairDetails.repairTime}`
                 ).toISOString(),
-                warranty: repairDetails.warranty,
+                warranty: repairDetails.warrantyCheck,
                 imei: repairDetails.imei,
-                phoneManufacturer: repairDetails.phoneManufacturer,
-                phoneModel: repairDetails.phoneModel || null,
-                faultCategory: repairDetails.faultCategory,
-                faultDescription: repairDetails.faultDescription,
+                make: repairDetails.phoneMake,
+                model: repairDetails.phoneModel || null,
+                fault_category: repairDetails.faultCategory,
+                fault_description: repairDetails.faultDescription,
                 phone: courtesyPhoneDetails.phoneBorrow || null,
                 charger: courtesyPhoneDetails.chargerBorrow || null,
-                costBond: costDetails.bond,
-                costServiceFee: costDetails.serviceFee,
-                costTotal: costDetails.totalCost,
-                costGst: costDetails.gst,
-                costTotalAndGst: costDetails.totalAndGst
+                cost_bond: costDetails.bond,
+                cost_service_fee: costDetails.serviceFee,
+                cost_total: costDetails.totalCost,
+                cost_gst: costDetails.gst,
+                cost_total_and_gst: costDetails.totalAndGst
 
             };
             console.log("Booking Data: ", bookingData); //logs the booking data to the console
 
-            //Insert Booking Data into Supabase
-            try {
-                const { data, error } = await supabase.from('bookings').insert([bookingData]);
-                // Handle Error
-                if (error) throw error;
-                //log success and refresh bookings
-                console.log("Booking added:", data);
-                // Clear form
-                event.target.reset();
-            } catch (error) {
-                console.error("Error adding booking:", error);
-            }
-
-            //Notification to user
+            const { error } = await supabase.from('bookings').insert([bookingData]);
+            if (error) throw error;
             alert("Booking submitted successfully!");
-
-            //Navigate to bookings page
             navigate('/bookings');
-        }
-        catch (e) {
-            alert("ERROR")
+        } catch (error) {
+            alert("Error submitting booking");
+            console.error("Error submitting booking:", error);
+        } finally {
+            setSubmitting(false);
         }
     }
 
@@ -134,23 +128,23 @@ function Home() {
                 {/*Customer Detail */}
                 <div className="col-12 col-lg-4 p-4 m-0" style={{ minHeight: '30vh', backgroundColor: '#FCF3CF' }}>
                     <FormCustomerDetail passDataToParent={updateCustomerType}
-                    sendCustomerDetails={(value) => setCustomerDetails(value)} />
+                    sendCustomerDetails={setCustomerDetails} />
                 </div>
                 {/*Repair Detail */}
                 <div className="col-12 col-lg-4 p-4 m-0" style={{ minHeight: '30vh', backgroundColor: '#D5f5e3' }}>
                     <FormRepairDetail  passDataToParent={UpdateWarranty}
-                     sendRepairDetails={(value) => setRepairDetails(value)} />
+                     sendRepairDetails={setRepairDetails} />
                 </div>
                 {/*Courtesy Phone and Cost*/}
                 <div className="col-12 col-lg-4 p-0 m-0">
                     {/*Courtesy Phone*/}
                     <div className="p-4" style={{ minHeight: '30vh', backgroundColor: '#2874a6' }}>
-                        <FormCourtesyPhone passDataToParent={updateSharedState} sendCourtesyPhoneDetails={(value) => setCourtesyPhoneDetails(value)} />
+                        <FormCourtesyPhone passDataToParent={updateSharedState} sendCourtesyPhoneDetails={setCourtesyPhoneDetails} />
                     </div>
                     {/*Cost*/}
                     <div className="p-4" style={{ minHeight: '20vh', backgroundColor: '#edbb99' }}>
                         <FormCost sharedPropBond={sharedBond}  sharedPropWarranty={sharedWarranty} sharedPropCustomerType={sharedCustomerType} 
-                        sendCostDetails={(value) => setCostDetails(value)} />
+                        sendCostDetails={setCostDetails} />
                         {/*Child 2 (FormCost) */}
                     </div>
                 </div>

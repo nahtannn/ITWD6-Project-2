@@ -1,10 +1,22 @@
 import { useState, useEffect } from 'react';
+
+
+const repairTimes = [];
+for (let hour = 9; hour <= 17; hour++) {
+    for (const minute of [0, 30]) {
+        const value = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+        const label = `${hour % 12 || 12}:${String(minute).padStart(2, '0')} ${hour < 12 ? 'AM' : 'PM'}`;
+        repairTimes.push({ value, label });
+    }
+}
 //Function Component
 function FormRepairDetail( { passDataToParent, sendRepairDetails } ) 
 {
     const updateWarranty = (value) => {
         passDataToParent(value);
     };
+
+
     //States
 
     //Data
@@ -37,8 +49,8 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setRepairDetails( {...repairDetails, ...{[name]: value} } );
+        const { name, value, type, checked } = e.target;
+        setRepairDetails(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
     };
     //useEffect() hook "SYNCHRONIZE" a component with another component (or external system)
     //useEffect hook syntax: useEffect(() => {}, [dependencies]);
@@ -55,10 +67,11 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
             {/*Purchase Date*/}
             <div className="row mt-2 ms-1 me-1">
                 <label className="col-12 col-md-12 col-lg-4 ">Purchase Date*</label>
-                <input className="col-12 col-md-12 col-lg-7" type="date" id="purchaseDate" 
+                <input className="col-12 col-md-12 col-lg-7" type="date" name="purchaseDate" id="purchaseDate" 
                     max={/* Ensure the purchase date has to be before today*/
                         new Date(Date.now() - oneDay).toISOString().split("T")[0]
                     }
+                    value={repairDetails.purchaseDate || ""}
                     onChange={(e) => { handleWarrantyChange(e); handleChange(e); }}
                 required/>
             </div>
@@ -70,6 +83,7 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
                         new Date(Date.now() + oneDay).toISOString().split("T")[0]
                     }
                     name="repairDate"
+                    value={repairDetails.repairDate || ""}
                     onChange={handleChange}
                 required/>
             </div>
@@ -78,15 +92,11 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
                 <label className="col-12 col-md-12 col-lg-4">Repair Time *</label>
                 <select className="col-12 col-md-12 col-lg-7" name="repairTime" required defaultValue="" onChange={handleChange}>
                     <option value="" disabled hidden>Select Time</option>
-                    <option value="9am">9 AM</option>
-                    <option value="10am">10 AM</option>
-                    <option value="11am">11 AM</option>
-                    <option value="12pm">12 PM</option>
-                    <option value="1pm">1 PM</option>
-                    <option value="2pm">2 PM</option>
-                    <option value="3pm">3 PM</option>
-                    <option value="4pm">4 PM</option>
-                    <option value="5pm">5 PM</option>
+                    {repairTimes.map((t) => (
+                        <option key={t.value} 
+                            value={t.value}>{t.label}
+                        </option>
+                    ))}
                 </select>
             </div>
             {/*Under Warranty*/}
@@ -95,10 +105,10 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
                     <legend className="col-11 float-none w-auto">Under Warranty</legend>
                     <div>
                         <label className="col-12 col-md-12 col-lg-4">Warranty</label>
-                        <input type="checkbox" id="warrantyCheck"
-                            /* Checkbox disabled if purchase date is greater than 24 months ago*/
-                            disabled={true} 
-                            onChange={(event) => { updateWarranty(event.target.checked); handleChange(event); }} 
+                        <input type="checkbox" id="warrantyCheck" name="warrantyCheck"
+                            checked={repairDetails.warrantyCheck}
+                            disabled={true}
+                            onChange={(e) => { updateWarranty(e.target.checked); handleChange(e); }} 
                         />
                     </div>
                 </fieldset>
@@ -132,7 +142,7 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
             {/*Phone Model*/}
             <div className="row mt-2 ms-1 me-1">
                 <label className="col-12 col-md-12 col-lg-4">Model Number</label>
-                <input className="col-12 col-md-12 col-lg-7" type="number" name="phoneModel" onChange={handleChange} />
+                <input className="col-12 col-md-12 col-lg-7" type="text" name="phoneModel" onChange={handleChange} />
             </div>
             {/*Fault Category*/}
             <div className="row mt-2 ms-1 me-1">
