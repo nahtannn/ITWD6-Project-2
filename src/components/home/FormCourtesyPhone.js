@@ -26,36 +26,38 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
     const [phoneBorrow, setPhoneBorrow] = useState(0); // 0 = 'none'
     const [chargerBorrow, setChargerBorrow] = useState(0); // 0 = 'none'
 
+    const phone = courtesyList.find(item => item.id === Number(phoneBorrow));
+    const charger = courtesyList.find(item => item.id === Number(chargerBorrow));
+
     //Hande "onChange" event
     let addPhone = (selectedOption) => {
-        selectedOption == 'none' ? setPhoneBorrow(0) : setPhoneBorrow(selectedOption);
-        //Update totalBond
-        let updateId = 0;
-        selectedOption == 'none' ? (updateId = 0) : (updateId = Number(selectedOption));
-        let updateBond = courtesyList.filter(item => {return item.id == updateId})[0].bond
-            + courtesyList.filter(item => {return item.id == chargerBorrow})[0].bond;
-        //Send data upto Parent by calling callback function "passDataToParent"
-        passDataToParent(updateBond); //Child1 (FormCourtesyPhone)
-        sendCourtesyPhoneDetails({
-            phoneBorrow: phoneBorrow == 0 ? 'none' : phoneBorrow,
-            chargerBorrow: chargerBorrow == 0 ? 'none' : chargerBorrow
-        });
-    };
+        const phoneId = selectedOption == 'none' ? 0 : Number(selectedOption);
+        setPhoneBorrow(phoneId);
 
-    let addCharger = (selectedOption) => {
-        selectedOption == 'none' ? setChargerBorrow(0) : setChargerBorrow(selectedOption);
-        //Update totalBond
-        let updateId = 0;
-        selectedOption == 'none' ? (updateId = 0) : (updateId = Number(selectedOption));
-        let updateBond = courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond
-            + courtesyList.filter(item => {return item.id == updateId})[0].bond;
-        //Send data upto Parent by calling callback function "passDataToParent"
-        passDataToParent(updateBond); //Child1 (FormCourtesyPhone)
+        const phone = courtesyList.find(item => item.id === phoneId);
+        const charger = courtesyList.find(item => item.id === Number(chargerBorrow));
+
+        passDataToParent(phone.bond + charger.bond);
+
         sendCourtesyPhoneDetails({
-            phoneBorrow: phoneBorrow == 0 ? 'none' : phoneBorrow,
-            chargerBorrow: chargerBorrow == 0 ? 'none' : chargerBorrow
+            phoneBorrow: phone.name,
+            chargerBorrow: charger.name
         });
     };
+    let addCharger = (selectedOption) => {
+        const chargerId = selectedOption == 'none' ? 0 : Number(selectedOption);
+        setChargerBorrow(chargerId);
+
+        const phone = courtesyList.find(item => item.id === Number(phoneBorrow));
+        const charger = courtesyList.find(item => item.id === chargerId);
+
+        passDataToParent(phone.bond + charger.bond);
+
+        sendCourtesyPhoneDetails({
+            phoneBorrow: phone.name,
+            chargerBorrow: charger.name
+        });
+}   ;
 
     //Filter courtesyList into phone and charger options for dropdown
     let phoneOptions = courtesyList.filter(item => item.type === 'phone');
@@ -63,9 +65,10 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
     let chargerOptions = courtesyList.filter(item => item.type === 'charger');
     
     useEffect(() => {
+        passDataToParent(phone.bond + charger.bond);
         sendCourtesyPhoneDetails({
-            phoneBorrow: phoneBorrow == 0 ? 'none' : phoneBorrow,
-            chargerBorrow: chargerBorrow == 0 ? 'none' : chargerBorrow
+            phoneBorrow: phone.name,
+            chargerBorrow: charger.name
         });
     }, [phoneBorrow, chargerBorrow, sendCourtesyPhoneDetails]);
     //Component UI: HTML Rendering

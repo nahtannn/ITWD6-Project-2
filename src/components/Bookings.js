@@ -92,7 +92,10 @@ function Bookings() {
                         <hr />
                         <div className="card-body">
                             <h5 className="card-title">Courtesy Items</h5>
-                            <p className="card-text"></p>
+                            <p className="card-text"><strong>Phone: </strong>{booking.phone}
+                                <br />
+                                <strong>Charger: </strong>{booking.charger}
+                            </p>
                             
                         </div>
                         <hr />
