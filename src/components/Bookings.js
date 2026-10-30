@@ -46,20 +46,16 @@ function Bookings() {
 
             {/*Retrieve data from bookings table on supabase */}
             <hr />
-            <h2 style={{ margin: "10px" }}>Bookings</h2>
+            <h1 style={{ textAlign: "center", margin: "20px 0" }}><u>Bookings</u></h1>
             {loading ? (<p>Loading bookings...</p>) : error ? (<p style={{ color: "red" }}>Error: {error}</p>) : (
                 bookings.map((booking) => (
                 <div key={booking.id} className="col-12 col-md-6 col-lg-4">
-                    <div className="card" style={{ border: "1px solid gray", backgroundColor: "#bdddff", padding: "0px", margin: "10px", borderRadius: "5px" }}>    
+                    <div className="card" style={{ border: "1px solid gray", backgroundColor: "#bdddff", padding: "0px", margin: "10px", borderRadius: "5px"}}>    
                         <div className="card-header">
                             <h4 className="card-title">{"Booking #" + booking.id}</h4>
                         </div>
                         <div className="card-body">
-                            <p className="card-text mb-1"><i>{"Invoice Date: " + new Date(booking.created_at).toLocaleString(undefined, {
-                                dateStyle: "medium",
-                                timeStyle: "short"
-                            })}</i></p>
-                            <h5 className="card-title">Customer Details</h5>
+                            <h5 className="card-title"><u>Customer Details</u></h5>
                             <p className="card-text mb-1">{booking.title + " " + booking.first_name + " " + booking.last_name}
                                 <br />
                                 {booking.phone_number + " • " + booking.email}
@@ -68,9 +64,9 @@ function Bookings() {
                             </p>
 
                         </div>
-                        <hr />
-                        <div className="card-body">
-                            <h5 className="card-title">Booking Details</h5>
+                        <hr style={{ margin: "0" }}/>
+                        <div className="card-body" style={{ minHeight: "250px" }}>
+                            <h5 className="card-title"><u>Booking Details</u></h5>
                             <p className="card-text"><strong>Repair Date: </strong>{new Date(booking.repair_date).toLocaleString(undefined, {
                                 dateStyle: "medium",
                                 timeStyle: "short"
@@ -89,25 +85,44 @@ function Bookings() {
                             </p>
                             
                         </div>
-                        <hr />
+                        <hr style={{ margin: "0" }}/>
                         <div className="card-body">
-                            <h5 className="card-title">Courtesy Items</h5>
+                            <h5 className="card-title"><u>Courtesy Items</u></h5>
                             <p className="card-text"><strong>Phone: </strong>{booking.phone}
                                 <br />
                                 <strong>Charger: </strong>{booking.charger}
                             </p>
                             
                         </div>
-                        <hr />
+                        <hr style={{ margin: "0" }}/>
                         <div className="card-body">
-                            <h5 className="card-title">Payment Details</h5>
-                            <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 className="card-title"><u>Payment Details</u></h5>
+                            <p className="card-text"><strong>Bond: </strong>{"$" + booking.cost_bond}
+                                <br />
+                                <strong>Service Fee: </strong>{"$" + booking.cost_service_fee}
+                                <br />
+                                <strong>Total: </strong>{"$" + booking.cost_total}
+                                <br />
+                                <strong>GST: </strong>{"$" + booking.cost_gst}
+                                <br />
+                                <strong>Total and GST: </strong>{"$" + booking.cost_total_and_gst}
+                            </p>
                             
                         </div>
-                        <hr />
+                        <hr style={{ margin: "0" }}/>
                         <div className="card-body">
-                            <p className="card-title"><strong>Fixit Repairs Ltd</strong></p>
-                            <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <p className="card-title mb-0"><strong>Nathan's Phone Repairs Ltd</strong></p>
+                            <p className="card-text" style={{ fontSize: "0.8rem", color: "#696969" }}><i>501 Gloucester Street, Napier 4112
+                                <br />
+                                021 741 2391 • contact@nathansphonerepairs.co.nz
+                                <br />
+                                Open Mon-Fri 9am - 5pm
+                            </i></p>
+                            <hr style={{ margin: "0" }}/>
+                            <p className="card-text mb-1" style={{ fontSize: "0.8rem" }}><i>{"Invoice Date: " + new Date(booking.created_at).toLocaleString(undefined, {
+                                dateStyle: "long",
+                                timeStyle: "short"
+                            })}</i></p>
                         </div>
                     </div>
                 </div>
@@ -119,11 +134,5 @@ function Bookings() {
     );
 }
 
-                    //<p>{booking.title + ": " + booking.first_name + " " + booking.last_name}</p>
-                    //<p>{"Bond: " + booking.cost_bond}</p>
-                    //<p>{"Service fee: " + booking.cost_service_fee}</p>
-                    //<p>{"Total: " + booking.cost_total}</p>
-                    //<p>{"GST: " + booking.cost_gst}</p>
-                    //<p>{"Total and GST: " + booking.cost_total_and_gst}</p>
 //Export
 export default Bookings;

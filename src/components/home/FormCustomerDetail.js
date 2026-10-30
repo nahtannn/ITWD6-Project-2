@@ -83,7 +83,7 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                 </div>
                 {/*First Name*/}
                 <div className="row mt-2 ms-1 me-1">
-                    <label className="col-12 col-md-12 col-lg-4">First Name *</label>
+                    <label className="col-12 col-md-12 col-lg-4">First Name(s) *</label>
                     <input className="col-12 col-md-12 col-lg-7" type="text" name="firstName"
                         pattern="[A-Za-z\s\-\u2013]+" title="First Name should only contain letters, spaces, hypens, and en-dashes" 
                         onInput={(e) => (e.target.value = e.target.value.replace(/[^A-Za-z\s\-\u2013]/g, ''))}
