@@ -38,7 +38,7 @@ function FormCost ( {
             <label className="col-12 col-md-12 col-lg-4">GST</label>
             <input className="col-12 col-md-12 col-lg-7" type="number" value={gst.toFixed(2)} readOnly />
         </div>
-        <div className="row mt-1 ms-3 me-3">
+        <div className="row mt-1 ms-3 me-3 mb-4">
             <label className="col-12 col-md-12 col-lg-4">Total(+GST)</label>
             <input className="col-12 col-md-12 col-lg-7" type="number" value={totalAndGst.toFixed(2)} readOnly />
         </div>

@@ -6,6 +6,7 @@ import FormCost from './home/FormCost';
 import FormButtons from './home/FormButtons';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { supabase } from './supabaseClient';
 
 //Component Function
 function Home() {
@@ -40,6 +41,7 @@ function Home() {
     const [repairDetails, setRepairDetails] = useState({
         purchaseDate: "",
         repairDate: "",
+        repairTime: "",
         warranty: false,
         imei: "",
         phoneManufacturer: "",
@@ -68,22 +70,63 @@ function Home() {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const attachedData = {
-                sharedBond,
-                sharedWarranty,
-                sharedCustomerType,
-                customerDetails,
-                repairDetails,
-                courtesyPhoneDetails,
-                costDetails
+            // Build bookingData object
+            const bookingData = {
+                customerType: sharedCustomerType ? "customer" : "business",
+                title: customerDetails.title,
+                firstName: customerDetails.firstName,
+                lastName: customerDetails.lastName,
+                street: customerDetails.street,
+                suburb: customerDetails.suburb || null,
+                city: customerDetails.city,
+                postCode: customerDetails.postCode || null,
+                phoneNumber: customerDetails.phone,
+                email: customerDetails.email,
+                purchaseDate: repairDetails.purchaseDate,
+                repairDate: new Date(
+                    `${repairDetails.repairDate}T${repairDetails.repairTime}`
+                ).toISOString(),
+                warranty: repairDetails.warranty,
+                imei: repairDetails.imei,
+                phoneManufacturer: repairDetails.phoneManufacturer,
+                phoneModel: repairDetails.phoneModel || null,
+                faultCategory: repairDetails.faultCategory,
+                faultDescription: repairDetails.faultDescription,
+                phone: courtesyPhoneDetails.phoneBorrow || null,
+                charger: courtesyPhoneDetails.chargerBorrow || null,
+                costBond: costDetails.bond,
+                costServiceFee: costDetails.serviceFee,
+                costTotal: costDetails.totalCost,
+                costGst: costDetails.gst,
+                costTotalAndGst: costDetails.totalAndGst
+
             };
-            console.log(attachedData);
+            console.log("Booking Data: ", bookingData); //logs the booking data to the console
+
+            //Insert Booking Data into Supabase
+            try {
+                const { data, error } = await supabase.from('bookings').insert([bookingData]);
+                // Handle Error
+                if (error) throw error;
+                //log success and refresh bookings
+                console.log("Booking added:", data);
+                // Clear form
+                event.target.reset();
+            } catch (error) {
+                console.error("Error adding booking:", error);
+            }
+
+            //Notification to user
+            alert("Booking submitted successfully!");
+
+            //Navigate to bookings page
             navigate('/bookings');
         }
         catch (e) {
-            alert('ERROR')
+            alert("ERROR")
         }
     }
+
     //UI Render
     return (
         <>

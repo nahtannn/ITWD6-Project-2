@@ -58,12 +58,12 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                         <legend className="col-11 float-none w-auto">Customer type *</legend>
                         <div>
                             <label className="col-12 col-md-12 col-lg-4">Customer</label>
-                            <input type="radio" name="customer-type" value="customer" defaultChecked={type.customer}
+                            <input type="radio" name="customerType" value="customer" defaultChecked={type.customer}
                              onChange={(e) => updateCustomerType(e)} required />
                         </div>
                         <div>
                             <label className="col-12 col-md-12 col-lg-4">Business</label>
-                            <input type="radio" name="customer-type" value="business" Checked={type.business}
+                            <input type="radio" name="customerType" value="business" defaultChecked={type.business}
                             onChange={(e) => updateCustomerType(e)} required/>
                         </div>
                     </fieldset>
