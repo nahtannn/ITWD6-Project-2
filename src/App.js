@@ -4,7 +4,7 @@ import Header from './components/include/Header';
 import Footer from './components/include/Footer';
 import Home from './components/Home';
 import AdvancedJS from './components/AdvancedJS';
-import { BrowserRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FAQ from './components/FAQ';
 import Bookings from './components/Bookings';
 
