@@ -22,8 +22,6 @@ function Home() {
     const updateCustomerType = (value) => setsharedCustomerType(value);
     const [sharedCustomerType, setsharedCustomerType] = useState('customer');
 
-    const updateCostDetails = (value) => setCostDetails(value); //Child2(FormCost) pass data to parent
-
 
     const [submitting, setSubmitting] = useState(false); //State to track form submission status
 
