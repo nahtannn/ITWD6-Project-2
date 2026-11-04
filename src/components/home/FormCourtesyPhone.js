@@ -70,6 +70,7 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
             phoneBorrow: phone.name,
             chargerBorrow: charger.name
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [phoneBorrow, chargerBorrow, sendCourtesyPhoneDetails]);
     //Component UI: HTML Rendering
     return(

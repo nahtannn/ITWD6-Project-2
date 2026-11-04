@@ -45,6 +45,7 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
     useEffect( () => {
         //Callback function
         sendCustomerDetails(customerDetails);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [customerDetails]);
 
 //Component UI: HTML Rendering

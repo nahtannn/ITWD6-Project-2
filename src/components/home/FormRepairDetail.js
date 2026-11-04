@@ -57,6 +57,7 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
     useEffect( () => {
         //Callback function
         sendRepairDetails(repairDetails);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [repairDetails]);
 
     const oneDay = 24 * 60 * 60 * 1000; //Defines how long one day is in milliseconds so it can be used to add or subtract one day from a date
