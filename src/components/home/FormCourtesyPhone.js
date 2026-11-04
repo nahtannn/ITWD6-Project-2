@@ -31,7 +31,7 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
 
     //Hande "onChange" event
     let addPhone = (selectedOption) => {
-        const phoneId = selectedOption == 'none' ? 0 : Number(selectedOption);
+        const phoneId = selectedOption === 'none' ? 0 : Number(selectedOption);
         setPhoneBorrow(phoneId);
 
         const phone = courtesyList.find(item => item.id === phoneId);
@@ -45,7 +45,7 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
         });
     };
     let addCharger = (selectedOption) => {
-        const chargerId = selectedOption == 'none' ? 0 : Number(selectedOption);
+        const chargerId = selectedOption === 'none' ? 0 : Number(selectedOption);
         setChargerBorrow(chargerId);
 
         const phone = courtesyList.find(item => item.id === Number(phoneBorrow));
@@ -83,7 +83,7 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
                 {/*Phone selection dropdown using courtesyList data */}
                 <select className="col-12 col-md-12 col-lg-7"
                  onChange={(selected) => addPhone(selected.target.value)}>
-                    <option value="none" selected>None</option>
+                    <option value="none" defaultValue>None</option>
                     {phoneOptions.map(item => (
                         <option key={item.id} value={item.id}>{item.name}</option>
                     ))}
@@ -95,7 +95,7 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
                 <label className="col-12 col-md-12 col-lg-4">Item Type </label>
                 <select className="col-12 col-md-12 col-lg-7" 
                  onChange={(selected) => addCharger(selected.target.value)}>
-                    <option value="none" selected>None</option>
+                    <option value="none" defaultValue>None</option>
                     {chargerOptions.map(item => (
                         <option key={item.id} value={item.id}>{item.name}</option>
                     ))}
@@ -118,16 +118,16 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
                         </tr>
 
                         {/* Display all items in the state in the table */}
-                        {phoneBorrow == 0 ? null : (
+                        {phoneBorrow === 0 ? null : (
                             <tr>
-                                <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].name}</td>
-                                <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond}</td>
+                                <td>{courtesyList.filter(item => {return item.id === phoneBorrow})[0].name}</td>
+                                <td>{courtesyList.filter(item => {return item.id === phoneBorrow})[0].bond}</td>
                             </tr>
                         )}
-                        {chargerBorrow == 0 ? null : (
+                        {chargerBorrow === 0 ? null : (
                             <tr>
-                                <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].name}</td>
-                                <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].bond}</td>
+                                <td>{courtesyList.filter(item => {return item.id === chargerBorrow})[0].name}</td>
+                                <td>{courtesyList.filter(item => {return item.id === chargerBorrow})[0].bond}</td>
                             </tr>
                         )}
                     </tbody>

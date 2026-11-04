@@ -131,7 +131,7 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
             <div className="row mt-2 ms-1 me-1">
                 <label className="col-12 col-md-12 col-lg-4">Make *</label>
                 <select className="col-12 col-md-12 col-lg-7" name="phoneMake" onChange={handleChange}>
-                    <option value="Apple" selected>Apple</option>
+                    <option value="Apple" defaultValue>Apple</option>
                     <option value="LG">LG</option>
                     <option value="Motorola">Motorola</option>
                     <option value="Nokia">Nokia</option>
@@ -148,7 +148,7 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
             <div className="row mt-2 ms-1 me-1">
                 <label className="col-12 col-md-12 col-lg-4">Fault Category *</label>
                 <select className="col-12 col-md-12 col-lg-7" name="faultCategory" onChange={handleChange}>
-                    <option value="Battery" selected>Battery</option>
+                    <option value="Battery" defaultValue>Battery</option>
                     <option value="Charging">Charging</option>
                     <option value="Screen">Screen</option>
                     <option value="SD-storage">SD-storage</option>
