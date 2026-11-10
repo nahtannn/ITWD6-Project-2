@@ -8,8 +8,7 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
     //The callback function is to change a piece of the state that is a part of the parent component
 
     //Assume there is a list of courtesy items as below
-    const courtesyList = [
-        { id: 0, type: 'none', name: 'none', bond: 0 },
+    const leftList = [
         { id: 1, type: 'phone', name: 'iPhone', bond: 275 },
         { id: 2, type: 'phone', name: 'Samsung Galaxy', bond: 100 },
         { id: 3, type: 'phone', name: 'Nokia', bond: 100 },
@@ -22,120 +21,147 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
         { id: 10, type: 'charger', name: 'OnePlus Charger', bond: 30 }
     ];
 
+    const rightList = [];
+
     //Declare "state"
-    const [phoneBorrow, setPhoneBorrow] = useState(0); // 0 = 'none'
-    const [chargerBorrow, setChargerBorrow] = useState(0); // 0 = 'none'
+    const [leftItems, setLeftItems] = useState(leftList);
+    const [rightItems, setRightItems] = useState(rightList);
+    const [totalBond, setTotalBond] = useState(0);
 
-    const phone = courtesyList.find(item => item.id === Number(phoneBorrow));
-    const charger = courtesyList.find(item => item.id === Number(chargerBorrow));
-
-    //Hande "onChange" event
-    let addPhone = (selectedOption) => {
-        const phoneId = selectedOption === 'none' ? 0 : Number(selectedOption);
-        setPhoneBorrow(phoneId);
-
-        const phone = courtesyList.find(item => item.id === phoneId);
-        const charger = courtesyList.find(item => item.id === Number(chargerBorrow));
-
-        passDataToParent(phone.bond + charger.bond);
-
-        sendCourtesyPhoneDetails({
-            phoneBorrow: phone.name,
-            chargerBorrow: charger.name
-        });
-    };
-    let addCharger = (selectedOption) => {
-        const chargerId = selectedOption === 'none' ? 0 : Number(selectedOption);
-        setChargerBorrow(chargerId);
-
-        const phone = courtesyList.find(item => item.id === Number(phoneBorrow));
-        const charger = courtesyList.find(item => item.id === chargerId);
-
-        passDataToParent(phone.bond + charger.bond);
-
-        sendCourtesyPhoneDetails({
-            phoneBorrow: phone.name,
-            chargerBorrow: charger.name
-        });
-}   ;
-
-    //Filter courtesyList into phone and charger options for dropdown
-    let phoneOptions = courtesyList.filter(item => item.type === 'phone');
-
-    let chargerOptions = courtesyList.filter(item => item.type === 'charger');
-    
+    //Sending the selected phone and charger details to the parent component
     useEffect(() => {
-        passDataToParent(phone.bond + charger.bond);
+        const phone = rightItems.find(item => item.type === 'phone');
+        const charger = rightItems.find(item => item.type === 'charger');
+
+        passDataToParent(totalBond);
         sendCourtesyPhoneDetails({
-            phoneBorrow: phone.name,
-            chargerBorrow: charger.name
+            phoneBorrow: phone ? phone.name : 'none',
+            chargerBorrow: charger ? charger.name : 'none'
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [phoneBorrow, chargerBorrow, sendCourtesyPhoneDetails]);
+    }, [rightItems, totalBond, sendCourtesyPhoneDetails]);
+
+    //Handle drag and drop events
+    //Handle drag start event
+    const handleDragStart = (e, item, source) => {
+        e.dataTransfer.setData("application/json", JSON.stringify({ item, source }));
+    };
+
+    //Handle drop event
+    const handleDrop = (e, target) => {
+        //Prevent default behavior
+        e.preventDefault();
+
+        //Get the dragged item and its source from the dataTransfer object
+        const { item, source } = JSON.parse(e.dataTransfer.getData("application/json"));
+
+        //Prevent dropping into the same zone
+        if (source === target) return;
+
+        //Move the item from the source list to the target zone
+        if (source === "left") {
+            //Only allow one item per type in the right zone
+            const existingItem = rightItems.find((i) => i.type === item.type);
+            if (existingItem) {alert("You can only select one unit per item."); return};
+            // Remove item from leftItems and add to rightItems
+            setLeftItems((prev) => prev.filter((i) => i.id !== item.id));
+            // Add item to rightItems
+            setRightItems((prev) => [...prev, item]);
+            // Update total bond
+            setTotalBond((prev) => prev + item.bond);
+        } else {
+            // Remove item from rightItems and add to leftItems
+            setRightItems((prev) => prev.filter((i) => i.id !== item.id));
+            // Add item to leftItems
+            setLeftItems((prev) => [...prev, item]);
+            // Update total bond
+            setTotalBond((prev) => prev - item.bond);
+        }
+    };
+
+    //Handle drag over event
+    const allowDrop = (e) => {
+        //Prevent default behavior to allow drop
+        e.preventDefault();
+    };
+
+    //Styles for container
+    const styles = {
+        dragDropContainer: {
+            display: "flex",
+            gap: "20px",
+            padding: "20px"
+        }
+    };
+
+
     //Component UI: HTML Rendering
     return(
         <>
-            {/*Courtesy Phone Section*/}
-            <h2>Courtesy Phone</h2>
-            {/*Phone item types*/}
-            <h4 className='ms-4 mt-2'>Choose a phone</h4>
-            <div className="row mt-2 ms-3 me-3">
-                <label className="col-12 col-md-12 col-lg-4">Item Type </label>
-                {/*Phone selection dropdown using courtesyList data */}
-                <select className="col-12 col-md-12 col-lg-7"
-                 onChange={(selected) => addPhone(selected.target.value)}>
-                    <option value="none" defaultValue>None</option>
-                    {phoneOptions.map(item => (
-                        <option key={item.id} value={item.id}>{item.name}</option>
-                    ))}
-                </select>
+            <div>
+                {/*Courtesy Phone Section*/}
+                <h2>Courtesy Phone</h2>
+                {/*Phone item types*/}
+                <h4 className='mt-2'>Choose a Phone and Charger</h4>
             </div>
-            {/*Charger item types*/}
-            <h4 className='ms-4 mt-2'>Choose a charger</h4>
-            <div className="row mt-2 ms-3 me-3">
-                <label className="col-12 col-md-12 col-lg-4">Item Type </label>
-                <select className="col-12 col-md-12 col-lg-7" 
-                 onChange={(selected) => addCharger(selected.target.value)}>
-                    <option value="none" defaultValue>None</option>
-                    {chargerOptions.map(item => (
-                        <option key={item.id} value={item.id}>{item.name}</option>
-                    ))}
-                </select>
-            </div>
-            {/*Table of added Courtesy items*/}
-            <h4 className='ms-4 mt-2'>Borrow items</h4>
-            <div className="row mt-2 ms-3 me-3 bg-white">
-                <table className="table table-bordered mb-0">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Cost</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Item</td>
-                            <td>Cost</td>
-                        </tr>
 
-                        {/* Display all items in the state in the table */}
-                        {phoneBorrow === 0 ? null : (
-                            <tr>
-                                <td>{courtesyList.filter(item => {return item.id === phoneBorrow})[0].name}</td>
-                                <td>{courtesyList.filter(item => {return item.id === phoneBorrow})[0].bond}</td>
-                            </tr>
-                        )}
-                        {chargerBorrow === 0 ? null : (
-                            <tr>
-                                <td>{courtesyList.filter(item => {return item.id === chargerBorrow})[0].name}</td>
-                                <td>{courtesyList.filter(item => {return item.id === chargerBorrow})[0].bond}</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+            <div style={styles.dragDropContainer}>
+                {/*Drop Zones Left*/}
+                <DropZone
+                    title="Available Items"
+                    items={leftItems}
+                    zone="left"
+                    onDrop={handleDrop}
+                    onDragOver={allowDrop}
+                    onDragStart={handleDragStart}
+                />
+                {/*Drop Zones Right*/}
+                <DropZone
+                    title="Selected Items"
+                    items={rightItems}
+                    zone="right"
+                    onDrop={handleDrop}
+                    onDragOver={allowDrop}
+                    onDragStart={handleDragStart}
+                />
             </div>
         </>
     );
 }
+
+//DropZone Component
+function DropZone( {title, items, zone, onDrop, onDragOver, onDragStart} ) {
+    //styles for the drop zone and items
+    const styles = {
+        dropZone: {
+            flex: 1,
+            minHeight: "100px",
+            border: "2px dashed #888",
+            borderRadius: "8px",
+            padding: "16px",
+            background: "#f8f9fa",
+        },
+        item: {
+            padding: "10px",
+            marginBottom: "8px",
+            background: "white",
+            border: "1px solid #ddd",
+            borderRadius: "4px",
+            cursor: "grab",
+        }
+    }
+    //Component UI: HTML Rendering
+    return (
+    <div style={styles.dropZone} onDrop={(e) => onDrop(e, zone)} onDragOver={onDragOver} >
+        <h3>{title}</h3>
+        {items.map((item) => (
+            <div key={item.id} draggable onDragStart={(e) => onDragStart(e, item, zone)} style={styles.item}
+> 
+                {item.name} - ${item.bond}
+            </div> ) )
+        }
+        </div>
+    );
+};
 //Export this component to the entire app, can be re-used or hooked into other Components
 export default FormCourtesyPhone;
