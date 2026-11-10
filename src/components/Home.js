@@ -45,9 +45,9 @@ function Home() {
         repairTime: "",
         warrantyCheck: false,
         imei: "",
-        phoneManufacturer: "",
+        phoneMake: "Apple",
         phoneModel: "",
-        faultCategory: "",
+        faultCategory: "Battery",
         faultDescription: ""
     });
 

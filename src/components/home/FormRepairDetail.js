@@ -42,9 +42,9 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
         repairTime: "",
         warrantyCheck: false,
         imei: "",
-        phoneMake: "",
+        phoneMake: "Apple",
         phoneModel: "",
-        faultCategory: "",
+        faultCategory: "Battery",
         faultDescription: ""
     });
 
