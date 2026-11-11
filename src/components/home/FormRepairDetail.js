@@ -63,7 +63,7 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
 
     async function upLoad(uploadFile) {
         let filePath = uploadFile.name;
-        const { data, error } = await supabase.storage
+        const { error } = await supabase.storage
             .from('Images')
             .upload(filePath, uploadFile, { cacheControl: '3600', upsert: true });
 

@@ -89,8 +89,9 @@ function FormCourtesyPhone( { passDataToParent, sendCourtesyPhoneDetails } ) {
     const styles = {
         dragDropContainer: {
             display: "flex",
-            gap: "20px",
-            padding: "20px"
+            flexDirection: "row",
+            gap: "8px",
+            padding: "0"
         }
     };
 
@@ -135,10 +136,10 @@ function DropZone( {title, items, zone, onDrop, onDragOver, onDragStart} ) {
     const styles = {
         dropZone: {
             flex: 1,
-            minHeight: "100px",
-            border: "2px dashed #888",
+            minHeight: "70px",
+            border: "1px solid #888",
             borderRadius: "8px",
-            padding: "16px",
+            padding: "8px",
             background: "#f8f9fa",
         },
         item: {
