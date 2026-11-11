@@ -142,9 +142,17 @@ function DropZone( {title, items, zone, onDrop, onDragOver, onDragStart} ) {
             padding: "8px",
             background: "#f8f9fa",
         },
+        title: { margin: "0 0 6px 0", fontSize: "0.95rem" },
+        list: {
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "4px",
+            maxHeight: "180px",
+            overflowY: "auto",
+        },
         item: {
-            padding: "10px",
-            marginBottom: "8px",
+            padding: "3px 6px",
+            fontSize: "0.85rem",
             background: "white",
             border: "1px solid #ddd",
             borderRadius: "4px",
@@ -153,14 +161,17 @@ function DropZone( {title, items, zone, onDrop, onDragOver, onDragStart} ) {
     }
     //Component UI: HTML Rendering
     return (
-    <div style={styles.dropZone} onDrop={(e) => onDrop(e, zone)} onDragOver={onDragOver} >
-        <h3>{title}</h3>
-        {items.map((item) => (
-            <div key={item.id} draggable onDragStart={(e) => onDragStart(e, item, zone)} style={styles.item}
-> 
-                {item.name} - ${item.bond}
-            </div> ) )
-        }
+        <div style={styles.dropZone} onDrop={(e) => onDrop(e, zone)} onDragOver={onDragOver}>
+            <h3 style={styles.title}>{title}</h3>
+            <div style={styles.list}>
+                {items.map((item) => (
+                    <div key={item.id} draggable
+                        onDragStart={(e) => onDragStart(e, item, zone)}
+                        style={styles.item}>
+                        {item.name} - ${item.bond}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
