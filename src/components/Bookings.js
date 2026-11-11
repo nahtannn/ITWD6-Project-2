@@ -82,6 +82,12 @@ function Bookings() {
                                 <i>{booking.fault_description}</i>
                                 <br />
                                 <strong>Warranty Status: </strong>{booking.warranty ? "Under Warranty" : "No Warranty"}
+                                {/*Display uploaded image if available */}
+                                {booking.image_url && (
+                                    <div>
+                                        <img src={booking.image_url} alt="Fault" style={{ maxWidth: "100%", maxHeight: "200px" }} />
+                                    </div>
+                                )}
                             </p>
                             
                         </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import { supabase } from '../supabaseClient';
 
 const repairTimes = [];
 for (let hour = 9; hour <= 17; hour++) {
@@ -45,7 +45,8 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
         phoneMake: "Apple",
         phoneModel: "",
         faultCategory: "Battery",
-        faultDescription: ""
+        faultDescription: "",
+        imageUrl: ""
     });
 
     const handleChange = (e) => {
@@ -59,6 +60,35 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
         sendRepairDetails(repairDetails);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [repairDetails]);
+
+    async function upLoad(uploadFile) {
+        let filePath = uploadFile.name;
+        const { data, error } = await supabase.storage
+            .from('Images')
+            .upload(filePath, uploadFile, { cacheControl: '3600', upsert: true });
+
+        if (error) {
+            console.error('Error uploading file:', error);
+            alert('File upload failed.');
+            return;
+        } else {
+            const { data: link } = supabase.storage.from("Images").getPublicUrl(filePath);
+            alert("File uploaded successfully! Link: " + link.publicUrl);
+            console.log("Public URL:", link.publicUrl);
+            setRepairDetails(prev => ({ ...prev, imageUrl: link.publicUrl }));
+        }
+    }
+
+    const handleUpload = () => {
+        const input = document.getElementById('fileInput');
+        const uploadFile = input.files[0];
+        if (!uploadFile) {
+            alert('Please select a file to upload.');
+            return;
+        }
+        upLoad(uploadFile);
+        input.value = "";
+    };
 
     const oneDay = 24 * 60 * 60 * 1000; //Defines how long one day is in milliseconds so it can be used to add or subtract one day from a date
     //Component UI: HTML Rendering
@@ -161,6 +191,14 @@ function FormRepairDetail( { passDataToParent, sendRepairDetails } )
             <div className="row mt-2 ms-1 me-1">
                 <label className="col-12 col-md-12 col-lg-4">Description *</label>
                 <textarea className="col-12 col-md-12 col-lg-7" name="faultDescription" rows="5" required style={{resize: 'none'}} onChange={handleChange} />
+            </div>
+            {/*Upload Image*/}
+            <div className="row mt-2 ms-1 me-1">
+                <label className="col-12 col-md-12 col-lg-4">Upload Image</label>
+                <div className="col-12 col-md-12 col-lg-7 p-0">
+                    <input type="file" id="fileInput" name="fileInput" />
+                    <button type="button" onClick={handleUpload}>Upload</button>
+                </div>
             </div>
         </>
     );

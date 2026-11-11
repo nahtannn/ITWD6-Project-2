@@ -48,7 +48,8 @@ function Home() {
         phoneMake: "Apple",
         phoneModel: "",
         faultCategory: "Battery",
-        faultDescription: ""
+        faultDescription: "",
+        imageUrl: ""
     });
 
     //Pass courtesy phone details from FormCourtesyPhone to Home component
@@ -96,6 +97,7 @@ function Home() {
                 model: repairDetails.phoneModel || null,
                 fault_category: repairDetails.faultCategory,
                 fault_description: repairDetails.faultDescription,
+                image_url: repairDetails.imageUrl || null,
                 phone: courtesyPhoneDetails.phoneBorrow || null,
                 charger: courtesyPhoneDetails.chargerBorrow || null,
                 cost_bond: costDetails.bond,
