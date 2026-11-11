@@ -1,5 +1,6 @@
 //Import all dependencies, other components
 import { useState, useEffect } from "react";
+import { AddressAutofill } from "@mapbox/search-js-react";
 
 //Function Component
 function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
@@ -48,6 +49,8 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [customerDetails]);
 
+    //token for mapbox
+    const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
 //Component UI: HTML Rendering
     return(
         <>
@@ -101,23 +104,25 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                 </div>
                 {/*Street*/}
                 <div className="row mt-2 ms-1 me-1">
-                    <label className="col-12 col-md-12 col-lg-4">Street *</label>
-                    <input className="col-12 col-md-12 col-lg-7" type="text" name="street" onChange={handleChange} required />
+                    <AddressAutofill accessToken={mapboxToken}>
+                        <label className="col-12 col-md-12 col-lg-4">Street *</label>
+                        <input className="col-12 col-md-12 col-lg-7" type="text" name="street" autoComplete="address-line1" onChange={handleChange} required />
+                    </AddressAutofill>
                 </div>
                 {/*Suburb*/}
                 <div className="row mt-2 ms-1 me-1">
                     <label className="col-12 col-md-12 col-lg-4">Suburb</label>
-                    <input className="col-12 col-md-12 col-lg-7" type="text" name="suburb" onChange={handleChange} />
+                    <input className="col-12 col-md-12 col-lg-7" type="text" name="suburb" autoComplete="address-level3" onChange={handleChange} />
                 </div>
                 {/*City*/}
                 <div className="row mt-2 ms-1 me-1">
                     <label className="col-12 col-md-12 col-lg-4">City *</label>
-                    <input className="col-12 col-md-12 col-lg-7" type="text" name="city" onChange={handleChange} required/>
+                    <input className="col-12 col-md-12 col-lg-7" type="text" name="city" autoComplete="address-level2" onChange={handleChange} required/>
                 </div>
                 {/*Postcode*/}
                 <div className="row mt-2 ms-1 me-1">
                     <label className="col-12 col-md-12 col-lg-4">Postcode</label>
-                    <input className="col-12 col-md-12 col-lg-7" type="text" name="postCode" onChange={handleChange}
+                    <input className="col-12 col-md-12 col-lg-7" type="text" name="postCode" autoComplete="postal-code" onChange={handleChange}
                         inputMode="numeric" pattern="[0-9]{4}" maxLength={4}
                         title="Postcode must be 4 digits"
                         onInput={(e) => {
