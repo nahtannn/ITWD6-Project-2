@@ -128,7 +128,7 @@ function AdvancedJS() {
                                             {/*Chart 1*/}
                                             <div className="col-12 col-md-6 col-lg-4 mb-4">
                                                 <div className="card shadow h-100">
-                                                    <div className="card-body">
+                                                    <div className="card-body d-flex justify-content-center align-items-center">
                                                         {/* Pie Chart: Warranty Status */}
                                                         <canvas id="warrantyChart"></canvas>
                                                     </div>
@@ -137,7 +137,7 @@ function AdvancedJS() {
                                             {/*Chart 2*/}
                                             <div className="col-12 col-md-6 col-lg-4 mb-4">
                                                 <div className="card shadow h-100">
-                                                    <div className="card-body">
+                                                    <div className="card-body d-flex justify-content-center align-items-center">
                                                         <canvas id="phoneMakeChart"></canvas>
                                                     </div>
                                                 </div>
@@ -145,7 +145,7 @@ function AdvancedJS() {
                                             {/*Chart 3*/}
                                             <div className="col-12 col-md-6 col-lg-4 mb-4">
                                                 <div className="card shadow h-100">
-                                                    <div className="card-body">
+                                                    <div className="card-body d-flex justify-content-center align-items-center">
                                                         <canvas id="faultChart"></canvas>
                                                     </div>
                                                 </div>
@@ -153,7 +153,7 @@ function AdvancedJS() {
                                             {/*Chart 4*/}
                                             <div className="col-12 col-md-6 col-lg-4 mb-4">
                                                 <div className="card shadow h-100">
-                                                    <div className="card-body">
+                                                    <div className="card-body d-flex justify-content-center align-items-center">
                                                         <canvas id="costChart"></canvas>
                                                     </div>
                                                 </div>
@@ -161,7 +161,7 @@ function AdvancedJS() {
                                             {/*Chart 5*/}
                                             <div className="col-12 col-md-6 col-lg-4 mb-4">
                                                 <div className="card shadow h-100">
-                                                    <div className="card-body">
+                                                    <div className="card-body d-flex justify-content-center align-items-center">
                                                         <canvas id="courtesyPhoneChart"></canvas>
                                                     </div>
                                                 </div>

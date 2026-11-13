@@ -41,7 +41,7 @@ export const phoneMakeChart = {
                         text: 'Phone Make Repairs'
                     },
                     legend: {
-                        position: 'bottom',
+                        display: false
                     }
                 }
             }

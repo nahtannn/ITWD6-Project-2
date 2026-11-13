@@ -41,7 +41,7 @@ export const faultChart = {
                         text: 'Fault Type'
                     },
                     legend: {
-                        position: 'bottom',
+                        display: false
                     }
                 }
             }
