@@ -23,7 +23,7 @@ export const phoneMakeChart = {
         //Removes any existing chart before creating a new one (as react can have issues with re-rendering the same chart)
         this.destroy();
 
-        //Pie Chart: Warranty vs No Warranty
+        //Bar Chart: Phone Make Repairs
         this.chart = new window.Chart(document.getElementById(chartID), {
             type: 'bar',
             data: {
