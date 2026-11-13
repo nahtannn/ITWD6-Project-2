@@ -51,7 +51,8 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
 
     //token for mapbox
     const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
-//Component UI: HTML Rendering
+    
+    //Component UI: HTML Rendering
     return(
         <>
             <div className="p-2">
