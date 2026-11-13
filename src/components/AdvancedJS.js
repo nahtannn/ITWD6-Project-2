@@ -1,6 +1,7 @@
 //Import
 import { useEffect } from "react";
 import { warrantyChart } from "./charts/warrantyChart";
+import { phoneMakeChart } from "./charts/phoneMakeChart";
 
 //Function Component
 function AdvancedJS() {
@@ -11,9 +12,11 @@ function AdvancedJS() {
     //Functions and Methods
     useEffect(() => {
         warrantyChart.renderUI("warrantyChart");
+        phoneMakeChart.renderUI("phoneMakeChart");
 
         return () => {
             warrantyChart.destroy();
+            phoneMakeChart.destroy();
         };
     }, []);
 
@@ -28,7 +31,7 @@ function AdvancedJS() {
                         <h2 className="accordion-header col-6 col-lg-12">
                             <button className="accordion-button" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                             style={{backgroundColor: '#5B9BD5'}}>
+                             style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
                                 Drag and Drop
                             </button>
                         </h2>
@@ -36,7 +39,7 @@ function AdvancedJS() {
                         <h2 className="accordion-header col-6 col-lg-12">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-                             style={{backgroundColor: '#5B9BD5'}}>
+                             style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
                                 Address Autofill
                             </button>
                         </h2>
@@ -44,7 +47,7 @@ function AdvancedJS() {
                         <h2 className="accordion-header col-6 col-lg-12">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
-                             style={{backgroundColor: '#5B9BD5'}}>
+                             style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
                                 Upload Image
                             </button>
                         </h2>
@@ -53,7 +56,7 @@ function AdvancedJS() {
                         <h2 className="accordion-header col-6 col-lg-12">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
-                             style={{backgroundColor: '#5B9BD5'}}>
+                             style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
                                 Bookings Filtering
                             </button>
                         </h2>
@@ -62,7 +65,7 @@ function AdvancedJS() {
                         <h2 className="accordion-header col-6 col-lg-12">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"
-                             style={{backgroundColor: '#5B9BD5'}}>
+                             style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
                                 Booking Charts
                             </button>
                         </h2>
@@ -117,6 +120,7 @@ function AdvancedJS() {
                                             <div className="col-12 col-md-6 col-lg-4">
                                                 <div className="card shadow">
                                                     <div className="card-body">
+                                                        {/* Pie Chart: Warranty Status */}
                                                         <canvas id="warrantyChart"></canvas>
                                                     </div>
                                                 </div>
@@ -125,7 +129,7 @@ function AdvancedJS() {
                                             <div className="col-12 col-md-6, col-lg-4">
                                                 <div className="card shadow">
                                                     <div className="card-body">
-                                                        <canvas id="chart2"></canvas>
+                                                        <canvas id="phoneMakeChart"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
