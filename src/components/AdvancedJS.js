@@ -1,4 +1,6 @@
 //Import
+import { useEffect } from "react";
+import { warrantyChart } from "./charts/warrantyChart";
 
 //Function Component
 function AdvancedJS() {
@@ -7,6 +9,13 @@ function AdvancedJS() {
     //Data
     
     //Functions and Methods
+    useEffect(() => {
+        warrantyChart.renderUI("warrantyChart");
+
+        return () => {
+            warrantyChart.destroy();
+        };
+    }, []);
 
     //Component UI
     return (
@@ -101,7 +110,27 @@ function AdvancedJS() {
                             <div id="collapseFive" className="accordion-collapse collapse" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    Content for Demo 5 goes here.
+                                    <h1>Booking Charts</h1>
+                                    <div className="container">
+                                        <div className="row">
+                                            {/*Chart 1*/}
+                                            <div className="col-12 col-md-6 col-lg-4">
+                                                <div className="card shadow">
+                                                    <div className="card-body">
+                                                        <canvas id="warrantyChart"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/*Chart 2*/}
+                                            <div className="col-12 col-md-6, col-lg-4">
+                                                <div className="card shadow">
+                                                    <div className="card-body">
+                                                        <canvas id="chart2"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
