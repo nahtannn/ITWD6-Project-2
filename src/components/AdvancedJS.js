@@ -86,7 +86,7 @@ function AdvancedJS() {
                             <div id="collapseOne" className="accordion-collapse collapse show" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    Content for Demo 1 goes here.
+                                    This Demo is integrated into the homepage
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@ function AdvancedJS() {
                             <div id="collapseTwo" className="accordion-collapse collapse" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    Content for Demo 2 goes here.
+                                    This Demo is integrated into the homepage
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ function AdvancedJS() {
                             <div id="collapseThree" className="accordion-collapse collapse" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    Content for Demo 3 goes here.
+                                    This Demo is integrated into the homepage
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@ function AdvancedJS() {
                             <div id="collapseFour" className="accordion-collapse collapse" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    Content for Demo 4 goes here.
+                                    This Demo is integrated into the bookings page
                                 </div>
                             </div>
                         </div>
