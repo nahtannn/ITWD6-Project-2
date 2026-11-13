@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { warrantyChart } from "./charts/warrantyChart";
 import { phoneMakeChart } from "./charts/phoneMakeChart";
+import { faultChart } from "./charts/faultChart";
 
 //Function Component
 function AdvancedJS() {
@@ -13,10 +14,12 @@ function AdvancedJS() {
     useEffect(() => {
         warrantyChart.renderUI("warrantyChart");
         phoneMakeChart.renderUI("phoneMakeChart");
+        faultChart.renderUI("faultChart");
 
         return () => {
             warrantyChart.destroy();
             phoneMakeChart.destroy();
+            faultChart.destroy();
         };
     }, []);
 
@@ -130,6 +133,14 @@ function AdvancedJS() {
                                                 <div className="card shadow">
                                                     <div className="card-body">
                                                         <canvas id="phoneMakeChart"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/*Chart 3*/}
+                                            <div className="col-12 col-md-6 col-lg-4">
+                                                <div className="card shadow">
+                                                    <div className="card-body">
+                                                        <canvas id="faultChart"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
