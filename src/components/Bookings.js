@@ -62,8 +62,8 @@ function Bookings() {
         // Apply filter
         const matchesWarranty =
             warrantyFilter === '' ||
-            (warrantyFilter === 'True')  && booking.warranty === true ||
-            (warrantyFilter === 'False') && booking.warranty === false;
+            (warrantyFilter === 'True'  && booking.warranty === true) ||
+            (warrantyFilter === 'False' && booking.warranty === false);
         const matchesType =
             typeFilter === '' ||
             booking.customer_type?.toLowerCase() === typeFilter.toLowerCase();
