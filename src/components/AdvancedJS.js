@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { warrantyChart } from "./charts/warrantyChart";
 import { phoneMakeChart } from "./charts/phoneMakeChart";
 import { faultChart } from "./charts/faultChart";
+import { costChart } from "./charts/costChart";
+import { courtesyPhoneChart } from "./charts/courtesyPhoneChart";
 
 //Function Component
 function AdvancedJS() {
@@ -15,11 +17,15 @@ function AdvancedJS() {
         warrantyChart.renderUI("warrantyChart");
         phoneMakeChart.renderUI("phoneMakeChart");
         faultChart.renderUI("faultChart");
+        costChart.renderUI("costChart");
+        courtesyPhoneChart.renderUI("courtesyPhoneChart");
 
         return () => {
             warrantyChart.destroy();
             phoneMakeChart.destroy();
             faultChart.destroy();
+            costChart.destroy();
+            courtesyPhoneChart.destroy();
         };
     }, []);
 
@@ -120,8 +126,8 @@ function AdvancedJS() {
                                     <div className="container">
                                         <div className="row">
                                             {/*Chart 1*/}
-                                            <div className="col-12 col-md-6 col-lg-4">
-                                                <div className="card shadow">
+                                            <div className="col-12 col-md-6 col-lg-4 mb-4">
+                                                <div className="card shadow h-100">
                                                     <div className="card-body">
                                                         {/* Pie Chart: Warranty Status */}
                                                         <canvas id="warrantyChart"></canvas>
@@ -129,18 +135,34 @@ function AdvancedJS() {
                                                 </div>
                                             </div>
                                             {/*Chart 2*/}
-                                            <div className="col-12 col-md-6, col-lg-4">
-                                                <div className="card shadow">
+                                            <div className="col-12 col-md-6 col-lg-4 mb-4">
+                                                <div className="card shadow h-100">
                                                     <div className="card-body">
                                                         <canvas id="phoneMakeChart"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
                                             {/*Chart 3*/}
-                                            <div className="col-12 col-md-6 col-lg-4">
-                                                <div className="card shadow">
+                                            <div className="col-12 col-md-6 col-lg-4 mb-4">
+                                                <div className="card shadow h-100">
                                                     <div className="card-body">
                                                         <canvas id="faultChart"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/*Chart 4*/}
+                                            <div className="col-12 col-md-6 col-lg-4 mb-4">
+                                                <div className="card shadow h-100">
+                                                    <div className="card-body">
+                                                        <canvas id="costChart"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/*Chart 5*/}
+                                            <div className="col-12 col-md-6 col-lg-4 mb-4">
+                                                <div className="card shadow h-100">
+                                                    <div className="card-body">
+                                                        <canvas id="courtesyPhoneChart"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
