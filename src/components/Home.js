@@ -109,6 +109,7 @@ function Home() {
             };
             console.log("Booking Data: ", bookingData); //logs the booking data to the console
 
+            // Insert booking data into Supabase
             const { error } = await supabase.from('bookings').insert([bookingData]);
             if (error) throw error;
             alert("Booking submitted successfully!");
@@ -136,13 +137,13 @@ function Home() {
                      sendRepairDetails={setRepairDetails} />
                 </div>
                 {/*Courtesy Phone and Cost*/}
-                <div className="col-12 col-lg-4 p-0 m-0">
+                <div className="col-12 col-lg-4 p-0 m-0 d-flex flex-column">
                     {/*Courtesy Phone*/}
                     <div className="p-4" style={{ minHeight: '30vh', backgroundColor: '#2874a6' }}>
                         <FormCourtesyPhone passDataToParent={updateSharedState} sendCourtesyPhoneDetails={setCourtesyPhoneDetails} />
                     </div>
                     {/*Cost*/}
-                    <div className="p-4" style={{ minHeight: '20vh', backgroundColor: '#edbb99' }}>
+                    <div className="p-4 flex-grow-1" style={{ minHeight: '20vh', backgroundColor: '#edbb99' }}>
                         <FormCost sharedPropBond={sharedBond}  sharedPropWarranty={sharedWarranty} sharedPropCustomerType={sharedCustomerType} 
                         sendCostDetails={setCostDetails} />
                         {/*Child 2 (FormCost) */}

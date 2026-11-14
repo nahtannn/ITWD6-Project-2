@@ -104,12 +104,13 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                         required/>
                 </div>
                 {/*Street*/}
-                <div className="row mt-2 ms-1 me-1">
-                    <AddressAutofill accessToken={mapboxToken}>
+                
+                <AddressAutofill accessToken={mapboxToken}>
+                    <div className="row mt-2 ms-1 me-1">
                         <label className="col-12 col-md-12 col-lg-4">Street *</label>
                         <input className="col-12 col-md-12 col-lg-7" type="text" name="street" autoComplete="address-line1" onChange={handleChange} required />
-                    </AddressAutofill>
-                </div>
+                    </div>
+                </AddressAutofill>
                 {/*Suburb*/}
                 <div className="row mt-2 ms-1 me-1">
                     <label className="col-12 col-md-12 col-lg-4">Suburb</label>
