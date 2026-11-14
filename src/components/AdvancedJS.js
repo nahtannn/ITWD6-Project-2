@@ -33,6 +33,23 @@ function AdvancedJS() {
     return (
         <>
             <div style={{minHeight: '60vh'}}>
+                {/*Statement Of Authenticity*/}
+                <div className="p-2 m-2" style={{border: '1px solid #707070', borderRadius: '5px', background: '#cff3ca'}}>
+                    <h5><strong>Statement Of Authenticity</strong></h5>
+                    <p>I confirm that:</p>
+                    <ul>
+                        <li>This is an original assessment and is entirely my own work.</li>
+                        <li>It contains no material previously published or written by another person or myself except where due acknowledgement is made in the text.</li>
+                        <li>No material which to a substantial extent, has been submitted for any other academic course, is included without acknowledgement.</li>
+                    </ul>
+                    <h6><strong>AI Disclourse</strong></h6>
+                    <p>I confirm that the following AI tools were used in the assignment:</p>
+                    <ul>
+                        <li>Github Copilot - Assisted with code suggestions and completions, I used copilot mainly to automate repetitive coding tasks such as styling and div creation where appropriate.</li>
+                        <li>Claude - Assisted with advanced javascript creation and debugging, I used Claude mainly to help troubleshoot complex logic and optimize code structure.</li>
+                    </ul>
+                    <p>I confirm that I reviewed and verified the contributions of the AI tools mentioned above and ensured that I understand how each feature works.</p>
+                </div>
                 <div className="accordion row align-items-start p-2" id="advancedJSAccordion">
                     {/* Accordion buttons go here */}
                     <div className="row col-12 col-lg-3">
