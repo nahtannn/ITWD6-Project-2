@@ -18,26 +18,6 @@ function AdvancedJS() {
     //Data
     
     //Functions and Methods
-    //Function to display page content based on the current route
-    const pageContent = {
-        '/': {
-        pageTitle: 'Phone Fix Booking System',
-        title: 'Phone Fix Booking System'
-        },
-        '/advanced-js': {
-        pageTitle: 'Extension',
-        title: 'Extension'
-        },
-        '/faq': {
-        pageTitle: 'FAQ',
-        title: 'FAQ'
-        },
-        '/bookings': {
-        pageTitle: 'Booking',
-        title: 'Booking'
-        }
-    };
-
 
     // useEffect hook to render and cleanup charts
     useEffect(() => {
@@ -174,7 +154,7 @@ function AdvancedJS() {
                                     <h1 className="mb-3">Upload Image</h1>
                                     <Link to="/" className="p-1" style={{ background: 'lightgray', border: '1px solid #9c9c9c', borderRadius: '10px', textDecoration: 'none', color: 'black' }}>This Demo is located on the Homepage</Link>
                                     <p>The customer can upload an image and it will be processed in the database and will return correctly on the bookings page</p>
-                                    <img src={ImageUpload} alt="Image Upload Demo" className="img-fluid mb-3" style={{ border: '2px solid #9c9c9c', borderRadius: '20px' }}/>
+                                    <img src={ImageUpload} alt="Uploading Demo" className="img-fluid mb-3" style={{ border: '2px solid #9c9c9c', borderRadius: '20px' }}/>
                                     <p>This code is implemented in the following files:</p>
                                     <ul>
                                         <li>FormCustomerDetails.js</li>
