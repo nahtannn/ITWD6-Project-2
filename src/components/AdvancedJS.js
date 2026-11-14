@@ -1,10 +1,15 @@
 //Import
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { warrantyChart } from "./charts/warrantyChart";
 import { phoneMakeChart } from "./charts/phoneMakeChart";
 import { faultChart } from "./charts/faultChart";
 import { costChart } from "./charts/costChart";
 import { courtesyPhoneChart } from "./charts/courtesyPhoneChart";
+import DragDrop from "../Images/DragDrop.png";
+import AddressAutofill from "../Images/AddressAutofill.png";
+import ImageUpload from "../Images/ImageUpload.png";
+import Filtering from "../Images/Filtering.png";
 
 //Function Component
 function AdvancedJS() {
@@ -13,6 +18,27 @@ function AdvancedJS() {
     //Data
     
     //Functions and Methods
+    //Function to display page content based on the current route
+    const pageContent = {
+        '/': {
+        pageTitle: 'Phone Fix Booking System',
+        title: 'Phone Fix Booking System'
+        },
+        '/advanced-js': {
+        pageTitle: 'Extension',
+        title: 'Extension'
+        },
+        '/faq': {
+        pageTitle: 'FAQ',
+        title: 'FAQ'
+        },
+        '/bookings': {
+        pageTitle: 'Booking',
+        title: 'Booking'
+        }
+    };
+
+
     // useEffect hook to render and cleanup charts
     useEffect(() => {
         // Render all charts when the component mounts
@@ -57,7 +83,7 @@ function AdvancedJS() {
                     {/* Accordion buttons go here */}
                     <div className="row col-12 col-lg-3">
                         {/* Toggle Button for Demo 1 */}
-                        <h2 className="accordion-header col-6 col-lg-12">
+                        <h2 className="accordion-header col-12">
                             <button className="accordion-button" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
                              style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
@@ -65,7 +91,7 @@ function AdvancedJS() {
                             </button>
                         </h2>
                         {/* Toggle Button for Demo 2 */}
-                        <h2 className="accordion-header col-6 col-lg-12">
+                        <h2 className="accordion-header col-12">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
                              style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
@@ -73,7 +99,7 @@ function AdvancedJS() {
                             </button>
                         </h2>
                         {/* Toggle Button for Demo 3 */}
-                        <h2 className="accordion-header col-6 col-lg-12">
+                        <h2 className="accordion-header col-12">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
                              style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
@@ -82,7 +108,7 @@ function AdvancedJS() {
                         </h2>
 
                         {/* Toggle Button for Demo 4 */}
-                        <h2 className="accordion-header col-6 col-lg-12">
+                        <h2 className="accordion-header col-12">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
                              style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
@@ -91,7 +117,7 @@ function AdvancedJS() {
                         </h2>
 
                         {/* Toggle Button for Demo 5 */}
-                        <h2 className="accordion-header col-6 col-lg-12">
+                        <h2 className="accordion-header col-12">
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                              data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"
                              style={{backgroundColor: '#92abc4', border: '1px dashed #707070' }}>
@@ -101,48 +127,88 @@ function AdvancedJS() {
                     </div>
                     {/* Content for each demo goes here */}
                     <div className="row col-12 col-lg-9">
+
                         {/* Demo 1 Area */}
                         <div className="accordion-item">
                             <div id="collapseOne" className="accordion-collapse collapse show" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    This Demo is integrated into the homepage
+                                    <h1 className="mb-3">Drag and Drop</h1>
+                                    <Link to="/" className="p-1" style={{ background: 'lightgray', border: '1px solid #9c9c9c', borderRadius: '10px', textDecoration: 'none', color: 'black' }}>This Demo is located on the Homepage</Link>
+                                    <p>The customer can choose their courtesy phone and charger (if they choose to) by dragging the items from the available options to the selection area.
+                                        They are limited to selecting one of each item. This selection is then passed to formcost.js where it is used to calculate the total cost of the selected items.
+                                    </p>
+                                    <img src={DragDrop} alt="Drag and Drop Demo" className="img-fluid mb-3" style={{ border: '2px solid #9c9c9c', borderRadius: '20px' }}/>
+                                    <p>This code is implemented in the following files:</p>
+                                    <ul>
+                                        <li>FormCourtesyPhone.js</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
+
                         {/* Demo 2 Area */}
                         <div className="accordion-item">
                             <div id="collapseTwo" className="accordion-collapse collapse" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    This Demo is integrated into the homepage
+                                    <h1 className="mb-3">Address Autofill</h1>
+                                    <Link to="/" className="p-1" style={{ background: 'lightgray', border: '1px solid #9c9c9c', borderRadius: '10px', textDecoration: 'none', color: 'black' }}>This Demo is located on the Homepage</Link>
+                                    <p>The customer can start typing their address and the form will automatically suggest and fill in the rest of the address based on the input.
+                                        This is done using the mapbox API.
+                                    </p>
+                                    <img src={AddressAutofill} alt="Address Autofill Demo" className="img-fluid mb-3" style={{ border: '2px solid #9c9c9c', borderRadius: '20px' }}/>
+                                    <p>This code is implemented in the following files:</p>
+                                    <ul>
+                                        <li>FormCustomerDetails.js</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
+
                         {/* Demo 3 Area */}
                         <div className="accordion-item">
                             <div id="collapseThree" className="accordion-collapse collapse" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    This Demo is integrated into the homepage
+                                    <h1 className="mb-3">Upload Image</h1>
+                                    <Link to="/" className="p-1" style={{ background: 'lightgray', border: '1px solid #9c9c9c', borderRadius: '10px', textDecoration: 'none', color: 'black' }}>This Demo is located on the Homepage</Link>
+                                    <p>The customer can upload an image and it will be processed in the database and will return correctly on the bookings page</p>
+                                    <img src={ImageUpload} alt="Image Upload Demo" className="img-fluid mb-3" style={{ border: '2px solid #9c9c9c', borderRadius: '20px' }}/>
+                                    <p>This code is implemented in the following files:</p>
+                                    <ul>
+                                        <li>FormCustomerDetails.js</li>
+                                        <li>Bookings.js</li>
+                                        <li>Home.js</li>
+                                        <li>It is also included in Supabase</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
+
                         {/* Demo 4 Area */}
                         <div className="accordion-item">
                             <div id="collapseFour" className="accordion-collapse collapse" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    This Demo is integrated into the bookings page
+                                    <h1 className="mb-3">Booking Search, Filter, and Sort</h1>
+                                    <Link to="/Bookings" className="p-1" style={{ background: 'lightgray', border: '1px solid #9c9c9c', borderRadius: '10px', textDecoration: 'none', color: 'black' }}>This Demo is located on the Bookings Page</Link>
+                                    <p>The user can search, filter, and sort bookings based on various criteria such as date, customer name, and warranty status.</p>
+                                    <img src={Filtering} alt="Filtering Demo" className="img-fluid mb-3" style={{ border: '2px solid #9c9c9c', borderRadius: '20px' }}/>
+                                    <p>This code is implemented in the following files:</p>
+                                    <ul>
+                                        <li>Bookings.js</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
+
                         {/* Demo 5 Area */}
                         <div className="accordion-item">
                             <div id="collapseFive" className="accordion-collapse collapse" 
                             data-bs-parent="#advancedJSAccordion">
                                 <div className="accordion-body" style={{minHeight: "50vh"}}>
-                                    <h1>Booking Charts</h1>
+                                    <h1 className="mb-3">Booking Charts</h1>
                                     <div className="container">
                                         <div className="row">
                                             {/*Chart 1*/}
