@@ -105,6 +105,7 @@ function FormCustomerDetail( { passDataToParent, sendCustomerDetails } ) {
                 </div>
                 {/*Street*/}
                 
+                {/*Address autofills using Mapbox API*/}
                 <AddressAutofill accessToken={mapboxToken}>
                     <div className="row mt-2 ms-1 me-1">
                         <label className="col-12 col-md-12 col-lg-4">Street *</label>

@@ -13,13 +13,15 @@ function AdvancedJS() {
     //Data
     
     //Functions and Methods
+    // useEffect hook to render and cleanup charts
     useEffect(() => {
+        // Render all charts when the component mounts
         warrantyChart.renderUI("warrantyChart");
         phoneMakeChart.renderUI("phoneMakeChart");
         faultChart.renderUI("faultChart");
         costChart.renderUI("costChart");
         courtesyPhoneChart.renderUI("courtesyPhoneChart");
-
+        // Cleanup function to destroy charts when the component unmounts
         return () => {
             warrantyChart.destroy();
             phoneMakeChart.destroy();
@@ -42,6 +44,7 @@ function AdvancedJS() {
                         <li>It contains no material previously published or written by another person or myself except where due acknowledgement is made in the text.</li>
                         <li>No material which to a substantial extent, has been submitted for any other academic course, is included without acknowledgement.</li>
                     </ul>
+                    {/*As i used AI tools, I am disclosing their usage below*/}
                     <h6><strong>AI Disclourse</strong></h6>
                     <p>I confirm that the following AI tools were used in the assignment:</p>
                     <ul>

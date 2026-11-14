@@ -149,11 +149,14 @@ function Bookings() {
                         filteredBookings.map((booking) => (
                         <div key={booking.id} className="col-12 col-md-6 col-lg-4">
                             <div className="card" style={{ border: "1px solid gray", backgroundColor: "#bdddff", padding: "0px", margin: "10px", borderRadius: "5px"}}>    
+                                {/*Booking header section*/}
                                 <div className="card-header">
                                     <h4 className="card-title">{"Booking #" + booking.id}</h4>
                                 </div>
+                                {/*Customer details section*/}
                                 <div className="card-body">
                                     <h5 className="card-title"><u>Customer Details</u></h5>
+                                    {/*Display customer name, type, and contact information*/}
                                     <p className="card-text mb-1">{booking.title + " " + booking.first_name + " " + booking.last_name + " • Type: " + booking.customer_type}
                                         <br />
                                         {booking.phone_number + " • " + booking.email}
@@ -163,8 +166,10 @@ function Bookings() {
 
                                 </div>
                                 <hr style={{ margin: "0" }}/>
+                                {/*Booking details section*/}
                                 <div className="card-body" style={{ minHeight: "250px" }}>
                                     <h5 className="card-title"><u>Booking Details</u></h5>
+                                    {/*Display repair date, phone, IMEI, fault, and warranty status*/}
                                     <p className="card-text"><strong>Repair Date: </strong>{new Date(booking.repair_date).toLocaleString(undefined, {
                                         dateStyle: "medium",
                                         timeStyle: "short"
@@ -190,6 +195,7 @@ function Bookings() {
                                     
                                 </div>
                                 <hr style={{ margin: "0" }}/>
+                                {/*Courtesy items section*/}
                                 <div className="card-body">
                                     <h5 className="card-title"><u>Courtesy Items</u></h5>
                                     <p className="card-text"><strong>Phone: </strong>{booking.phone}
@@ -199,6 +205,7 @@ function Bookings() {
                                     
                                 </div>
                                 <hr style={{ margin: "0" }}/>
+                                {/*Payment details section*/}
                                 <div className="card-body">
                                     <h5 className="card-title"><u>Payment Details</u></h5>
                                     <p className="card-text"><strong>Bond: </strong>{"$" + booking.cost_bond.toFixed(2)}
@@ -214,6 +221,7 @@ function Bookings() {
                                     
                                 </div>
                                 <hr style={{ margin: "0" }}/>
+                                {/*Company details section*/}
                                 <div className="card-body">
                                     <p className="card-title mb-0"><strong>Nathan's Phone Repairs Ltd</strong></p>
                                     <p className="card-text" style={{ fontSize: "0.8rem", color: "#696969" }}><i>501 Gloucester Street, Napier 4112
